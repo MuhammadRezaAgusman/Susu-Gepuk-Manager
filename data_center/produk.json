@@ -1,0 +1,56 @@
+  [
+    {
+        "kode": "S03",
+        "nama": "Susu Strawberry ",
+        "harga": 16000,
+        "stok": 23
+    },
+    {
+        "kode": "S04",
+        "nama": "Susu Cheese ",
+        "harga": 180000,
+        "stok": 20
+    },
+    {
+        "kode": "S05",
+        "nama": "Susu Matcha Kyoto ",
+        "harga": 180000,
+        "stok": 20
+    },
+    {
+        "kode": "C01",
+        "nama": "Susu Tawar Plain ",
+        "harga": 130000,
+        "stok": 20
+    },
+    {
+        "kode": "C02",
+        "nama": "Susu Manis Delight ",
+        "harga": 140000,
+        "stok": 20
+    },
+    {
+        "kode": "P01",
+        "nama": "Susu Vanilla Sweet ",
+        "harga": 150000,
+        "stok": 20
+    },
+    {
+        "kode": "P02",
+        "nama": "Susu Melon Frost ",
+        "harga": 150000,
+        "stok": 20
+    },
+    {
+        "kode": "P03",
+        "nama": "Susu Coklat Swiz ",
+        "harga": 160000,
+        "stok": 16
+    },
+    {
+        "kode": "P04",
+        "nama": "Susu Taro Royale ",
+        "harga": 180000,
+        "stok": 20
+    }
+]

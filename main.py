@@ -37,6 +37,9 @@ def tampilan_menu_2():
 def tampilan_menu_3():
     pass
 
+def tampilan_menu_4():
+    pass
+
 def tampilan_menu_5():#fungsi menampilkan menu 2
     print("="*55)
     print("               D A T A  P E L A N G G A N")
@@ -76,7 +79,7 @@ def menu_3():
 def menu_4():
     pass
 
-def menu_5():#fungsi untuk proses menu 2
+def menu_5():#fungsi untuk proses menu 5
     while True:
         try:
             tampilan_menu_5()
@@ -93,7 +96,9 @@ def menu_5():#fungsi untuk proses menu 2
                 print() 
                 print("Opsi tidak ada")
         except ValueError: 
+            print()
             print("input hanya berupa angka bulat")
+            print()
 
 def system():#fungsi sistem utama
     while True:
@@ -102,7 +107,7 @@ def system():#fungsi sistem utama
             menu = int(input("Pilih Menu (1-6): "))
             if menu == 1:
                 print()
-                tampilan_menu_1()
+                menu_1()
                 continue
             elif menu == 2:
                 print()
@@ -124,8 +129,10 @@ def system():#fungsi sistem utama
             else:
                 print() 
                 print("Menu Tidak ada")
-        except ValueError: print("Masukkan menu yang sesuai")               
+        except ValueError: 
+            print()
+            print("Masukkan menu yang sesuai")
+            print()               
             
-
 
 system()

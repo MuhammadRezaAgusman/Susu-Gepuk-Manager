@@ -3,25 +3,30 @@
         "id": "GRB-001",
         "nama": "Gerobak Panam (Depan UNRI)",
         "kecamatan": "Tuah Madani",
-        "status": "BUKA"},
+        "status": "BUKA",
+        "penjualan": 0},
     {
         "id": "GRB-002",
         "nama": "Gerobak Marpoyan (Depan UIR)",
         "kecamatan": "Marpoyan Damai",
-        "status": "BUKA"},
+        "status": "BUKA",
+        "penjualan": 0},
     {
         "id": "GRB-003",
         "nama": "Gerobak Gobah",
         "kecamatan": "Sail",
-        "status": "BUKA"},
+        "status": "BUKA",
+        "penjualan": 0},
     {
         "id": "GRB-004",
         "nama": "Gerobak Delima",
         "kecamatan": "Binawidya",
-        "status": "BUKA"},
+        "status": "BUKA",
+        "penjualan": 0},
     {
         "id": "GRB-005",
         "nama": "Gerobak Sukajadi",
         "kecamatan": "Sukajadi",
-        "status": "BUKA"}
+        "status": "BUKA",
+        "penjualan": 0}
 ]

@@ -2,7 +2,7 @@ from utility import file_handler as handler
 from utility import searching as src
 from utility import sorting as srt
 import models
-import structures
+from structures import circular_linked_list, double_linked_list, graph, linked_list, queue, stack, tree
 import time
 def tampilkan_menu_utama():#pungsi menampilkan menu utama
     print("="*55)
@@ -29,6 +29,9 @@ def tampilan_menu_1(data):
     print("-"*65)
     for i in range(len(data)):
         print(f"{data[i]["id"].ljust(11)}{data[i]["nama"].ljust(30)}{data[i]["kecamatan"].ljust(20)}{data[i]["status"].ljust(8)}")
+    print("-"*65)
+    print(f"[Total: {i} Gerobak]")
+    
 
 
 def tampilan_menu_2():
@@ -75,6 +78,36 @@ def tampilan_menu_5():#fungsi menampilkan menu 2
 def menu_1():
     data = handler.load_json("data_center/cabang.json")
     tampilan_menu_1(data)
+
+    #json ke linked list
+    ll = linked_list.LinkedList()
+    for cabang in data:
+        ll.append(cabang)
+
+    while True:
+        print(">> Pilihan Fitur:")
+        print("   [A] Cek Gerobak")
+        print("   [B] Cek Rute Distribusi Bahan Baku")
+        print("   [C] Kembali ke menu utama")
+
+        pilih = input("Pilih Opsi (A/B/C): ").upper()
+        if pilih == "A":
+            id = input("Masukkan id gerobak: ").upper()
+            hasil = ll.search_id(id)
+            if hasil:
+                print(f"""Gerobak ditemukan!
+                Gerobak  : {hasil['nama']}
+                ID       : {hasil['id']}
+                Kecamatan: {hasil['kecamatan']}
+                Status   : {hasil['status']}
+                Penjualan: {hasil['penjualan']}""")
+            else: print("Gerobak tidak ditemukan")
+        elif pilih == "B":
+            pass
+        elif pilih == "C":
+            break
+        else:
+            print("Masukan salah")
     
 def menu_2():
     while True:

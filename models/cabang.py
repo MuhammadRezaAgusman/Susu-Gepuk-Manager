@@ -1,15 +1,15 @@
 class Cabang:
-    def __init__(self, kode, nama, kota):
-        self.kode = kode
+    def __init__(self, id, nama, kecamatan,):
+        self.id = id
         self.nama = nama
-        self.kota = kota
+        self.kecamatan = kecamatan
         self.penjualan = 0
 
     def to_dict(self):
         return {
-            "kode": self.kode,
+            "id": self.id,
             "nama": self.nama,
-            "kota": self.kota,
+            "kecamatan": self.kecamatan,
             "penjualan": self.penjualan
         }
 

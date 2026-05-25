@@ -1,4 +1,8 @@
 from utility import file_handler as handler
+from utility import searching as src
+from utility import sorting as srt
+import models
+import structures
 import time
 def tampilkan_menu_utama():#pungsi menampilkan menu utama
     print("="*55)
@@ -17,10 +21,15 @@ def tampilkan_menu_utama():#pungsi menampilkan menu utama
     print("[6] Simpan Data dan Keluar")
     print("="*55)
 
-def tampilan_menu_1():
+def tampilan_menu_1(data):
     print("-"*65)
     print("DAFTAR GEROBAK SUSU GEPUK")
     print("-"*65)
+    print("ID         GEROBAK                       KECAMATAN           STATUS")
+    print("-"*65)
+    for i in range(len(data)):
+        print(f"{data[i]["id"].ljust(11)}{data[i]["nama"].ljust(30)}{data[i]["kecamatan"].ljust(20)}{data[i]["status"].ljust(8)}")
+
 
 def tampilan_menu_2():
     print("="*55)
@@ -64,13 +73,9 @@ def tampilan_menu_5():#fungsi menampilkan menu 2
     print()
 
 def menu_1():
-    tampilan_menu_1()
     data = handler.load_json("data_center/cabang.json")
-    print("ID         GEROBAK                       KECAMATAN           STATUS")
-    print("-"*65)
-    for i in range(len(data)):
-        print(f"{data[i]["id"].ljust(11)}{data[i]["nama"].ljust(30)}{data[i]["kecamatan"].ljust(20)}{data[i]["status"].ljust(8)}")
-
+    tampilan_menu_1(data)
+    
 def menu_2():
     while True:
         try:

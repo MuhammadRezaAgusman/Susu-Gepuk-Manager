@@ -1,0 +1,37 @@
+[
+    {
+        "asal": "GRB-001",
+        "tujuan": "GRB-004",
+        "jarak": 3.5
+    },
+    {
+        "asal": "GRB-004",
+        "tujuan": "GRB-002",
+        "jarak": 6.2
+    },
+    {
+        "asal": "GRB-002",
+        "tujuan": "GRB-003",
+        "jarak": 5.8
+    },
+    {
+        "asal": "GRB-003",
+        "tujuan": "GRB-005",
+        "jarak": 4.4
+    },
+    {
+        "asal": "GRB-004",
+        "tujuan": "GRB-005",
+        "jarak": 7.1
+    },
+    {
+        "asal": "GRB-001",
+        "tujuan": "GRB-002",
+        "jarak": 8.9
+    },
+    {
+        "asal": "GRB-005",
+        "tujuan": "GRB-002",
+        "jarak": 9.6
+    }
+]

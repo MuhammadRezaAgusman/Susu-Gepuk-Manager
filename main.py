@@ -1,9 +1,11 @@
 from utility import file_handler as handler
 from utility import searching as src
 from utility import sorting as srt
-import models
+from models import cabang, pelanggan, produk, transaksi
 from structures import circular_linked_list, double_linked_list, graph, linked_list, queue, stack, tree
 import time
+
+
 def tampilkan_menu_utama():#pungsi menampilkan menu utama
     print("="*55)
     print("          S U S U   G E P U K  M A N A G E R")
@@ -18,10 +20,10 @@ def tampilkan_menu_utama():#pungsi menampilkan menu utama
     print("[3] Pemesanan/Kasir Antrean")
     print("[4] Riwayat Transaksi Terakhir")
     print("[5] Data Pelanggan Terdaftar")
-    print("[6] Simpan Data dan Keluar")
+    print("[6] Keluar")
     print("="*55)
 
-def tampilan_menu_1(data):
+def tampilan_menu_1(data):#menampilkan isi menu 1
     print("-"*65)
     print("DAFTAR GEROBAK SUSU GEPUK")
     print("-"*65)
@@ -76,19 +78,21 @@ def tampilan_menu_5():#fungsi menampilkan menu 2
     print()
 
 def menu_1():
-    data = handler.load_json("data_center/cabang.json")
-    tampilan_menu_1(data)
+    #load data cabang.json
+    data_cabang = handler.load_json("data_center/cabang.json")
+    tampilan_menu_1(data_cabang)
 
     #json ke linked list
     ll = linked_list.LinkedList()
-    for cabang in data:
+    for cabang in data_cabang:
         ll.append(cabang)
 
     while True:
         print(">> Pilihan Fitur:")
         print("   [A] Cek Gerobak")
         print("   [B] Cek Rute Distribusi Bahan Baku")
-        print("   [C] Kembali ke menu utama")
+        print("   [C] Ubah status gerobak")
+        print("   [D] Kembali ke menu utama")
 
         pilih = input("Pilih Opsi (A/B/C): ").upper()
         if pilih == "A":
@@ -103,8 +107,78 @@ def menu_1():
                 Penjualan: {hasil['penjualan']}""")
             else: print("Gerobak tidak ditemukan")
         elif pilih == "B":
-            pass
+            #load json untuk jalur graph
+            data_jalur = handler.load_json("data_center/jalur.json")
+
+            #inisiasi class untuk objek
+            path = graph.Graph() 
+
+            #buat graph
+            for item in data_jalur:
+                path.add_edge(
+                    item['asal'],
+                    item['tujuan'],
+                    item['jarak']
+                )
+
+            print("\n= RUTE DISTRIBUSI TERCEPAT (Algoritma Graph) =")
+            while True:
+                asal = input("Masukkan ID Gerobak Asal: ").upper()
+                if src.validasi_id(data_cabang, asal) == True:
+                    break
+                else: print("ID asal tak ditemukan")
+
+            while True:
+                tujuan = input("Masukkan ID Gerobak Tujuan: ").upper()
+                if src.validasi_id(data_cabang, tujuan) == True:#validasi input id tujuan
+                    break
+                else: print("ID asal tak ditemukan") 
+
+            jarak, rute = path.dijkstra(asal, tujuan)
+            print("Mencari rute terpendek via Graph...")
+            time.sleep(0.5)
+            print("Rute ditemukan:", " -> ".join(rute))
+            print("Total estimasi jarak:", jarak, "KM")
+
         elif pilih == "C":
+            print("\nDaftar cabang: ")
+            print("-"*65)
+            print("ID         GEROBAK                       KECAMATAN           STATUS")
+            print("-"*65)
+            for i in range(len(data_cabang)):
+                print(f"{data_cabang[i]["id"].ljust(11)}{data_cabang[i]["nama"].ljust(30)}{data_cabang[i]["kecamatan"].ljust(20)}{data_cabang[i]["status"].ljust(8)}")
+            print("-"*65)
+
+            while True:
+                pilih_cabang = input("Masukkan ID Cabang: ").upper()
+
+                #validasi input id cabang
+                if src.validasi_id(data_cabang, pilih_cabang) != True:
+                    print("ID tidak valid")
+                
+                for i in range(len(data_cabang)):
+                    if data_cabang[i]['id'] == pilih_cabang:
+                        print(f"Gerobak ID {data_cabang[i]['nama']} Berstatus {data_cabang[i]['status']}")
+                        while True:
+                            status = input("Ingin ubah status? (Y/N)").upper()
+                            if status == "Y":
+                                if data_cabang[i]['status'] == "BUKA":
+                                    data_cabang[i]['status'] = "TUTUP"
+                                    print(f"Gerobak {data_cabang[i]['nama']} ({data_cabang[i]['id']}) di-{data_cabang[i]['status']}")
+                                    handler.save_json("data_center/cabang.json", data_cabang)
+                                    break
+                                else: 
+                                    data_cabang[i]['status'] == "BUKA"
+                                    print(f"Gerobak {data_cabang[i]['nama']} ({data_cabang[i]['id']}) di-{data_cabang[i]['status']}")
+                                    handler.save_json("data_center/cabang.json", data_cabang)
+                                    break
+                            elif status == "N":
+                                print("Tidak ada cabang yang berubah status")
+                                break
+                            else: print("Masukkan Input dengan benar")
+                break                
+            
+        elif pilih == "D":
             break
         else:
             print("Masukan salah")

@@ -1,7 +1,9 @@
 from utility import file_handler as handler
 from utility import searching as src
 from utility import sorting as srt
-from models import cabang, pelanggan, produk, transaksi
+from utility import validate
+from utility import generate as gen
+from models import cabang, pelanggan, produk_baru, transaksi
 from structures import circular_linked_list, double_linked_list, graph, linked_list, queue, stack, tree
 import time
 
@@ -32,7 +34,7 @@ def tampilan_menu_1(data):#menampilkan isi menu 1
     for i in range(len(data)):
         print(f"{data[i]["id"].ljust(11)}{data[i]["nama"].ljust(30)}{data[i]["kecamatan"].ljust(20)}{data[i]["status"].ljust(8)}")
     print("-"*65)
-    print(f"[Total: {i} Gerobak]")
+    print(f"[Total: {i+1} Gerobak]")
     
 
 
@@ -41,9 +43,9 @@ def tampilan_menu_2():
     print("            V A R I A N  S U S U  G E P U K")
     print("="*55)
     print()
-    print("[1] Lihat Semua Menu")
-    print("[2] Urutan Harga Termurah")
-    print("[3] Cari Varian Rasa")
+    print("[1] Lihat Semua Menu [Urutan harga termurah - BST in-order]")
+    print("[2] Cari Varian Rasa")
+    print("[3] Tambah Varian Rasa Baru")
     print("[4] Kembali Ke Menu Utama")
     print()
     print("="*55)
@@ -88,7 +90,7 @@ def menu_1():
         ll.append(cabang)
 
     while True:
-        print(">> Pilihan Fitur:")
+        print("\n>> Pilihan Fitur:")
         print("   [A] Cek Gerobak")
         print("   [B] Cek Rute Distribusi Bahan Baku")
         print("   [C] Ubah status gerobak")
@@ -124,7 +126,7 @@ def menu_1():
             print("\n= RUTE DISTRIBUSI TERCEPAT (Algoritma Graph) =")
             while True:
                 asal = input("Masukkan ID Gerobak Asal: ").upper()
-                if src.validasi_id(data_cabang, asal) == True:
+                if src.validasi_id(data_cabang, asal) == True:#validasi input id asal
                     break
                 else: print("ID asal tak ditemukan")
 
@@ -153,7 +155,7 @@ def menu_1():
                 pilih_cabang = input("Masukkan ID Cabang: ").upper()
 
                 #validasi input id cabang
-                if src.validasi_id(data_cabang, pilih_cabang) != True:
+                if validate.validasi_id(data_cabang, pilih_cabang) != True:
                     print("ID tidak valid")
                 
                 for i in range(len(data_cabang)):
@@ -178,28 +180,44 @@ def menu_1():
                             else: print("Masukkan Input dengan benar")
                 break                
             
-        elif pilih == "D":
-            break
+        elif pilih == "D": break
         else:
             print("Masukan salah")
     
 def menu_2():
+    #Data produk.json di-load ke sistem
+    data_produk = handler.load_json("data_center/produk.json")
     while True:
         try:
             tampilan_menu_2()
             menu = int(input("Pilih Opsi (1-4): "))
-            if menu == 1:
-                pass
+
+            if menu == 1:                
+                bst = tree.BinarySearchTree()
+                for produk in data_produk:#memasukkan data produk ke binary search tree
+                    bst.insert(produk)
+                print("\n-------- DAFTAR MENU SUSU GEPUK PEKANBARU (Urutan Harga) --------")
+                print("ID Produk".ljust(12),"Varian Rasa".ljust(28),"Harga".ljust(13),"Stok")
+                print("-----------------------------------------------------------------")
+                bst.inorder()
+                print("-----------------------------------------------------------------")
+                print("[Sistem: Data diambil melalui struktur Binary Search Tree]")
+                print()
             elif menu == 2:
-                pass
+                print("\n== Cari Varian Rasa ==")
+                varian = input("Masukkan Nama Varian: ")
+                src.cari_menu(varian, data_produk)
+
             elif menu == 3:
-                pass
+                varian_baru = produk_baru.Produk()
+                new_id = gen.gen_id(data_produk)
+                varian_baru.insert(new_id)
+                data_produk.append(varian_baru.to_dict())
+                handler.save_json("data_center/produk.json", data_produk)
             elif menu == 4:
                 break
             else: print("Menu tidak ada")
-        except ValueError: 
-            print()
-            print("Menu hanya berupa angka bulat")
+        except ValueError: print("\nMenu hanya berupa angka bulat")
 
 def menu_3():
     tampilan_menu_3()
@@ -215,9 +233,7 @@ def menu_3():
             elif menu == 4:
                 break
             else: print("Menu tidak ada")
-        except ValueError: 
-            print()
-            print("Menu hanya berupa angka bulat")
+        except ValueError: print("\nMenu hanya berupa angka bulat")
 
 def menu_4():
     pass
@@ -235,13 +251,8 @@ def menu_5():#fungsi untuk proses menu 5
                 continue
             elif menu == 4:
                 continue
-            else:
-                print() 
-                print("Opsi tidak ada")
-        except ValueError: 
-            print()
-            print("input hanya berupa angka bulat")
-            print()
+            else: print("\nOpsi tidak ada")
+        except ValueError: print("\ninput hanya berupa angka bulat\n")
 
 def system():#fungsi sistem utama
     while True:
@@ -251,7 +262,6 @@ def system():#fungsi sistem utama
             if menu == 1:
                 print()
                 menu_1()
-                continue
             elif menu == 2:
                 print()
                 menu_2()
@@ -269,13 +279,7 @@ def system():#fungsi sistem utama
                 print()
                 print("Selesai")
                 break
-            else:
-                print() 
-                print("Menu Tidak ada")
-        except ValueError: 
-            print()
-            print("Masukkan menu yang sesuai")
-            print()               
+            else: print("\nMenu Tidak ada")
+        except ValueError: print("\nMasukkan menu yang sesuai\n")              
             
-
 system()

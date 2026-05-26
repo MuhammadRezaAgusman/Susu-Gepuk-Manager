@@ -1,56 +1,62 @@
-  [
+[
     {
-        "kode": "S03",
-        "nama": "Susu Strawberry ",
+        "kode": "PRD-1001",
+        "nama": "Susu Gepuk Strawberry ",
         "harga": 16000,
         "stok": 23
     },
     {
-        "kode": "S04",
-        "nama": "Susu Cheese ",
-        "harga": 180000,
+        "kode": "PRD-1002",
+        "nama": "Susu Gepuk Cheese ",
+        "harga": 18000,
         "stok": 20
     },
     {
-        "kode": "S05",
-        "nama": "Susu Matcha Kyoto ",
-        "harga": 180000,
+        "kode": "PRD-1003",
+        "nama": "Susu Gepuk Matcha Kyoto ",
+        "harga": 18000,
         "stok": 20
     },
     {
-        "kode": "C01",
-        "nama": "Susu Tawar Plain ",
-        "harga": 130000,
+        "kode": "PRD-1004",
+        "nama": "Susu Gepuk Tawar Plain ",
+        "harga": 13000,
         "stok": 20
     },
     {
-        "kode": "C02",
-        "nama": "Susu Manis Delight ",
-        "harga": 140000,
+        "kode": "PRD-1005",
+        "nama": "Susu Gepuk Manis Delight ",
+        "harga": 14000,
         "stok": 20
     },
     {
-        "kode": "P01",
-        "nama": "Susu Vanilla Sweet ",
-        "harga": 150000,
+        "kode": "PRD-1006",
+        "nama": "Susu Gepuk Vanilla Sweet ",
+        "harga": 15000,
         "stok": 20
     },
     {
-        "kode": "P02",
-        "nama": "Susu Melon Frost ",
-        "harga": 150000,
+        "kode": "PRD-1007",
+        "nama": "Susu Gepuk Melon Frost ",
+        "harga": 15000,
         "stok": 20
     },
     {
-        "kode": "P03",
-        "nama": "Susu Coklat Swiz ",
-        "harga": 160000,
+        "kode": "PRD-1008",
+        "nama": "Susu Gepuk Coklat Swiz ",
+        "harga": 16000,
         "stok": 16
     },
     {
-        "kode": "P04",
-        "nama": "Susu Taro Royale ",
-        "harga": 180000,
+        "kode": "PRD-1009",
+        "nama": "Susu Gepuk Taro Royale ",
+        "harga": 18000,
         "stok": 20
+    },
+    {
+        "kode": "PRD-1010",
+        "nama": "KOPI",
+        "harga": 80000,
+        "stok": 0
     }
 ]

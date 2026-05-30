@@ -1,6 +1,6 @@
 from utility import validate as vdl
 
-def cari_menu(nama, data):
+def cari_data_menu(nama, data):
     for i in range(len(data)):
         status = vdl.validasi_stok(data[i])
         if nama in data[i]['nama']:
@@ -12,3 +12,12 @@ def cari_menu(nama, data):
             return
     else: print("Menu Tak Ditemukan")
 
+def input_menu(data, suggest):
+    for i in range(len(data)):
+        if suggest in data[i]['nama']:
+            return data[i]['kode']
+
+def cari_detail_menu(data, id):
+    for i in range(len(data)):
+        if data[i]['kode'] == id:
+            return data[i]['nama'], data[i]['harga']

@@ -1,3 +1,5 @@
+from utility import file_handler as handler
+
 def validasi_id(data, suggest):
     for i in range(len(data)):
         if suggest in data[i]['id'] :
@@ -12,3 +14,34 @@ def validasi_stok(data):
     elif data['stok'] >5:
                 status = "Tersedia"
     return status
+
+def validasi_nama(nama):
+    if nama == '':
+        return False
+    elif nama.isdigit():
+        return False
+    elif not all(char.isalpha() or char.isspace() for char in nama):
+        return False
+    return True
+
+def validasi_menu(menu_suggest):
+    data_menu = handler.load_json("data_center/produk.json")
+    for i in range(len(data_menu)):
+        if menu_suggest in data_menu[i]['nama']:
+            return True
+    return False
+
+def cek_stok(data, id, jumlah):
+    for i in range(len(data)):
+        if id in data[i]['kode']:
+            if data[i]['stok'] < jumlah:
+                return False
+            else: return True  
+
+def validasi_gerobak(nama):
+    data_gerobak = handler.load_json("data_center/cabang.json")
+    for i in range(len(data_gerobak)):
+        if nama in data_gerobak[i]['nama']:
+            return [data_gerobak[i]['nama'], data_gerobak[i]['id']] 
+    else:  
+        return False         

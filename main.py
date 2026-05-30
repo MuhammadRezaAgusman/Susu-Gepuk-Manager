@@ -6,6 +6,7 @@ from utility import generate as gen
 from models import cabang, pelanggan, produk_baru, transaksi
 from structures import circular_linked_list, double_linked_list, graph, linked_list, queue, stack, tree
 import time
+import datetime
 
 
 def tampilkan_menu_utama():#pungsi menampilkan menu utama
@@ -13,8 +14,6 @@ def tampilkan_menu_utama():#pungsi menampilkan menu utama
     print("          S U S U   G E P U K  M A N A G E R")
     print("   - Sistem Manajemen Gerobak Susu Gepuk Pekanbaru -   ")
     print("="*55)
-    time.sleep(1)
-    print("[System Status: Data berhasil dimuat dari JSON]")
     print()
     time.sleep(0.5)
     print("[1] Manajemen Gerobak")
@@ -96,7 +95,7 @@ def menu_1():
         print("   [C] Ubah status gerobak")
         print("   [D] Kembali ke menu utama")
 
-        pilih = input("Pilih Opsi (A/B/C): ").upper()
+        pilih = input("\nPilih Opsi (A-D): ").upper()
         if pilih == "A":
             id = input("Masukkan id gerobak: ").upper()
             hasil = ll.search_id(id)
@@ -206,30 +205,102 @@ def menu_2():
             elif menu == 2:
                 print("\n== Cari Varian Rasa ==")
                 varian = input("Masukkan Nama Varian: ")
-                src.cari_menu(varian, data_produk)
-
+                src.cari_detail_menu(varian, data_produk)
+                print()
             elif menu == 3:
                 varian_baru = produk_baru.Produk()
-                new_id = gen.gen_id(data_produk)
+                new_id = gen.gen_id('produk')
                 varian_baru.insert(new_id)
                 data_produk.append(varian_baru.to_dict())
                 handler.save_json("data_center/produk.json", data_produk)
+                print("[System Status: Varian baru berhasil disimpan!\n]")
             elif menu == 4:
                 break
-            else: print("Menu tidak ada")
-        except ValueError: print("\nMenu hanya berupa angka bulat")
+            else: print("\nMenu tidak ada\n")
+        except ValueError: print("\nMenu hanya berupa angka bulat\n")
 
+#memasukkan class Queue kedalam variabel antrian, dibuat diluar fungsi
+#agar saat fungsi dipanggil lagi queue nya tidak hilang
+antrian = queue.Queue()
 def menu_3():
-    tampilan_menu_3()
+    data_produk = handler.load_json("data_center/produk.json")
     while True:
+        tampilan_menu_3()
+        data_pesanan_pelanggan = {}
         try:
             menu = int(input("Pilih Opsi (1-4): "))
             if menu == 1:
-                pass
+                while True:
+                    gerobak = input("\nMasukkan nama Gerobak: ")
+                    if validate.validasi_gerobak(gerobak) == False:
+                        print("Gerobak tak ditemukan, lihat keyword kembali")
+                        continue
+                    
+                    data_gerobak = validate.validasi_gerobak(gerobak)
+                    data_pesanan_pelanggan['nama gerobak'] = data_gerobak[0]
+                    data_pesanan_pelanggan['kode gerobak'] = data_gerobak[1]
+                    break
+
+                while True:
+                    pesanan = []
+                    nama_pelanggan = input("Masukkan Nama Pembeli: ").strip()
+                    if validate.validasi_nama(nama_pelanggan) == False:
+                        print("Nama tidak valid!")
+                    data_pesanan_pelanggan['nama'] = nama_pelanggan
+                    break
+
+                while True:
+                    pesanan_menu = input("Masukkan Menu: ")
+                    if validate.validasi_menu(pesanan_menu) == False:
+                        print("Menu Tidak Valid")
+                        continue
+                    else:
+                        print("Menu ditemukan")
+
+                    id_menu = src.input_menu(data_produk, pesanan_menu)
+                    
+                    while True:
+                        try:
+                            jumlah_pesanan = int(input("Jumlah pesanan: "))
+                            if validate.cek_stok(data_produk, id_menu, jumlah_pesanan)== False:
+                                print("Stok tak cukup")
+                                pilih = input("Ganti pemesanan?(Y/N) ").upper()
+                                if pilih == "Y":
+                                    print()
+                                elif pilih == "N":
+                                    break
+                                else: print("Masukkan input yang diminta!")
+                            else: 
+                                chamber = [id_menu, jumlah_pesanan]
+                                pesanan.append(chamber)
+                                break
+                        except ValueError: print("Masukan hanya angka bulat")
+
+                    pesan_lagi = -1
+                    while pesan_lagi != 'Y' or 'N':
+                        pesan_lagi = input("Pesan lagi (Y/N)? ").upper()
+                        if pesan_lagi == 'Y':
+                            print()
+                            break
+                        elif pesan_lagi == 'N':
+                            data_pesanan_pelanggan['pesanan'] = pesanan
+                            print()
+                            break
+                        else: print("masukkan salah")
+                    
+                    if pesan_lagi == 'N':
+                        break
+                if pesan_lagi == "N":
+                    antrian.enqueue(data_pesanan_pelanggan) 
+                    id_antrean = gen.gen_id('antrian')
+                    gen.gen_tampilan_pesanan(data_produk, data_pesanan_pelanggan, id_antrean)
+                    print("[System Status: Pesanan berhasil dimasukkan]")   
+
+                    
             elif menu == 2:
-                pass
+                antrian.dequeue()
             elif menu == 3:
-                pass
+                antrian.display()
             elif menu == 4:
                 break
             else: print("Menu tidak ada")
@@ -279,7 +350,7 @@ def system():#fungsi sistem utama
                 print()
                 print("Selesai")
                 break
-            else: print("\nMenu Tidak ada")
-        except ValueError: print("\nMasukkan menu yang sesuai\n")              
+            else: print("Menu Tidak ada\n")
+        except ValueError: print("Masukkan menu yang sesuai\n")              
             
 system()

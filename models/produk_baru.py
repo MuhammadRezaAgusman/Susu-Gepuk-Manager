@@ -12,7 +12,7 @@ class Produk:
 
         while True:
             try:
-                self.harga = int(input("Masukkan Harga           :"))
+                self.harga = int(input("Masukkan Harga           : "))
                 break
             except ValueError: print("Hanya Angka Bulat")
         

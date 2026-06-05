@@ -314,7 +314,64 @@ def menu_3():
         except ValueError: print("\nMenu hanya berupa angka bulat")
 
 def menu_4():
-    pass
+    #mengambil data riwayat transaksi langsung dari data center
+    data_produk = handler.load_json("data_center/produk.json")
+    data_transaksi = handler.load_json("data_center/transaksi.json")
+
+    #menampilkan header menu 4
+    tampilan_menu_4()
+
+    #jika file masih kosong
+    if not data_transaksi:
+        print("Menampilkan 3 data transaksi terbaru yang berhasil diproses.\n")
+        print("="*55)
+        print("Belum ada transaksi yang berhasil diproses.")
+        print("="*55)
+    else:
+        print("Menampilkan 3 data transaksi terbaru yang berhasil diproses.\n")
+        print("="*55)
+
+        #memindahkan seluruh list transaksi ke stack
+        stack_transaksi = stack.Stack()
+        for trx in data_transaksi:
+
+            #inisialisasi untuk menampung riwayat ransaksi
+            stack_transaksi.push(trx)
+
+        #mengambil data 3 transaksi paling terbaru
+        tiga_trx_terbaru = stack_transaksi.menampilkan_transaksi(limit=3)
+
+        #untuk menghitung dan mencetak 3 data transaksi yang sudah diambil
+        for idx, trx_terbaru in enumerate (tiga_trx_terbaru):
+            if idx == 0:
+                print ("[TOP STACK]")
+
+        #menghitung total bayar
+            total_bayar = 0
+            list_pesanan = trx_terbaru.get("pesanan", [])
+
+            for item in list_pesanan:
+                id_menu = item[0]
+                jumlah_beli = item[1]
+
+                #mencari harga dari data produk yang cocok
+                for produk in data_produk:
+                    if produk.get('kode') == id_menu:
+                        total_bayar += produk.get("harga", 0) * jumlah_beli
+                        break
+
+            #mencetak nota riwayat transaksi
+            print(f"ID TRANSAKSI: {trx_terbaru.get("id transaksi")} ")
+            print(f"PELANGGAN   : {trx_terbaru.get("nama")} ")
+            print(f"LOKASI      :  {trx_terbaru.get("nama gerobak")} ({trx_terbaru.get("kode gerobak")})")
+            print(f"TOTAL BAYAR : Rp {total_bayar:,} ")
+            print(f"STATUS      : SELESAI ")
+            print("=" *55)
+
+print()
+input("tekan ENTER untuk kembali ke menu utama")
+
+
 
 def menu_5():#fungsi untuk proses menu 5
     while True:
@@ -348,7 +405,7 @@ def system():#fungsi sistem utama
                 menu_3()
             elif menu == 4:
                 print()
-                tampilan_menu_4()
+                menu_4()
             elif menu == 5:
                 print()
                 menu_5()

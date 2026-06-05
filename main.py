@@ -291,16 +291,23 @@ def menu_3():
                     if pesan_lagi == 'N':
                         break
                 if pesan_lagi == "N":
-                    antrian.enqueue(data_pesanan_pelanggan) 
                     id_antrean = gen.gen_id('antrian')
+                    data_pesanan_pelanggan['id antrian'] = id_antrean
+                    antrian.enqueue(data_pesanan_pelanggan) 
                     gen.gen_tampilan_pesanan(data_produk, data_pesanan_pelanggan, id_antrean)
                     print("[System Status: Pesanan berhasil dimasukkan]")   
 
                     
             elif menu == 2:
-                antrian.dequeue()
+                data_transaksi = handler.load_json("data_center/transaksi.json")
+                to_transaction = antrian.dequeue()
+                id_trx = gen.gen_id('transaksi')
+                to_transaction['id transaksi'] = id_trx
+                data_transaksi.append(to_transaction)
+                handler.save_json("data_center/transaksi.json", data_transaksi)
+                
             elif menu == 3:
-                antrian.display()
+                antrian.display(data_produk)
             elif menu == 4:
                 break
             else: print("Menu tidak ada")

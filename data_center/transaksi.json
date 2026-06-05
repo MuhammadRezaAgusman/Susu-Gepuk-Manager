@@ -1,1 +1,15 @@
-[]
+[
+    {
+        "nama gerobak": "Gerobak Panam (Depan UNRI)",
+        "kode gerobak": "GRB-001",
+        "nama": "Eja",
+        "pesanan": [
+            [
+                "PRD-003",
+                1
+            ]
+        ],
+        "id antrian": "ATR-014",
+        "id transaksi": "TRX-20260602-001"
+    }
+]

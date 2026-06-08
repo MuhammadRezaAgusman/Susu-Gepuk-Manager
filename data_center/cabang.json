@@ -3,8 +3,8 @@
         "id": "GRB-001",
         "nama": "Gerobak Panam (Depan UNRI)",
         "kecamatan": "Tuah Madani",
-        "status": "TUTUP",
-        "penjualan": 0
+        "status": "BUKA",
+        "penjualan": 5
     },
     {
         "id": "GRB-002",

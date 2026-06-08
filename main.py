@@ -3,17 +3,17 @@ from utility import searching as src
 from utility import sorting as srt
 from utility import validate
 from utility import generate as gen
-from models import cabang, pelanggan, produk_baru, transaksi
-from structures import circular_linked_list, double_linked_list, graph, linked_list, queue, stack, tree
+from models import cabang, member, produk_baru, transaksi
+from structures import circular_linked_list, double_linked_list, graph, linked_list, queue, stack, tree, hash
 import time
 import datetime
 
 
 def tampilkan_menu_utama():#pungsi menampilkan menu utama
-    print("="*55)
+    print("="*65)
     print("          S U S U   G E P U K  M A N A G E R")
     print("   - Sistem Manajemen Gerobak Susu Gepuk Pekanbaru -   ")
-    print("="*55)
+    print("="*65)
     print()
     time.sleep(0.5)
     print("[1] Manajemen Gerobak")
@@ -22,7 +22,7 @@ def tampilkan_menu_utama():#pungsi menampilkan menu utama
     print("[4] Riwayat Transaksi Terakhir")
     print("[5] Data Pelanggan Terdaftar")
     print("[6] Keluar")
-    print("="*55)
+    print("="*65)
 
 def tampilan_menu_1(data):#menampilkan isi menu 1
     print("-"*65)
@@ -38,21 +38,21 @@ def tampilan_menu_1(data):#menampilkan isi menu 1
 
 
 def tampilan_menu_2():
-    print("="*55)
+    print("="*65)
     print("            V A R I A N  S U S U  G E P U K")
-    print("="*55)
+    print("="*65)
     print()
     print("[1] Lihat Semua Menu [Urutan harga termurah - BST in-order]")
     print("[2] Cari Varian Rasa")
     print("[3] Tambah Varian Rasa Baru")
     print("[4] Kembali Ke Menu Utama")
     print()
-    print("="*55)
+    print("="*65)
 
 def tampilan_menu_3():
-    print("-"*55)
+    print("-"*65)
     print("            KASIR DAN ANTREAN PESANAN (Queue)")
-    print("-"*55)
+    print("-"*65)
     print()
     print("[1] Tambah Pesanan Baru Ke Antrean")
     print("[2] Proses / Buat Pesanan Paling Terdepan (Dequeue)")
@@ -61,21 +61,21 @@ def tampilan_menu_3():
     print()
 
 def tampilan_menu_4():
-    print("-"*55)
+    print("-"*65)
     print("            RIWAYAT TRANSAKSI TERAKHIR (STACK)")
-    print("-"*55)
+    print("-"*65)
 
-def tampilan_menu_5():#fungsi menampilkan menu 2
-    print("="*55)
+def tampilan_menu_5():#fungsi menampilkan menu 5 
+    print("="*65)
     print("               D A T A  P E L A N G G A N")
-    print("="*55)
+    print("="*65)
     print()
     print("[1] Lihat Semua Pelanggan Terdaftar")
     print("[2] Cari Data Pelanggan")
     print("[3] Registrasi Pelanggan Baru")
     print("[4] Kembali ke menu utama")
     print()
-    print("="*55)
+    print("="*65)
     print()
 
 def menu_1():
@@ -125,15 +125,17 @@ def menu_1():
             print("\n= RUTE DISTRIBUSI TERCEPAT (Algoritma Graph) =")
             while True:
                 asal = input("Masukkan ID Gerobak Asal: ").upper()
-                if src.validasi_id(data_cabang, asal) == True:#validasi input id asal
+                if validate.validasi_id(data_cabang, asal) == True:#validasi input id asal
                     break
-                else: print("ID asal tak ditemukan")
+                else: 
+                    print("ID asal tak ditemukan")
 
             while True:
                 tujuan = input("Masukkan ID Gerobak Tujuan: ").upper()
-                if src.validasi_id(data_cabang, tujuan) == True:#validasi input id tujuan
+                if validate.validasi_id(data_cabang, tujuan) == True:#validasi input id tujuan
                     break
-                else: print("ID asal tak ditemukan") 
+                else: 
+                    print("ID asal tak ditemukan") 
 
             jarak, rute = path.dijkstra(asal, tujuan)
             print("Mencari rute terpendek via Graph...")
@@ -156,6 +158,7 @@ def menu_1():
                 #validasi input id cabang
                 if validate.validasi_id(data_cabang, pilih_cabang) != True:
                     print("ID tidak valid")
+                    continue
                 
                 for i in range(len(data_cabang)):
                     if data_cabang[i]['id'] == pilih_cabang:
@@ -169,7 +172,7 @@ def menu_1():
                                     handler.save_json("data_center/cabang.json", data_cabang)
                                     break
                                 else: 
-                                    data_cabang[i]['status'] == "BUKA"
+                                    data_cabang[i]['status'] = "BUKA"
                                     print(f"Gerobak {data_cabang[i]['nama']} ({data_cabang[i]['id']}) di-{data_cabang[i]['status']}")
                                     handler.save_json("data_center/cabang.json", data_cabang)
                                     break
@@ -200,12 +203,12 @@ def menu_2():
                 print("-----------------------------------------------------------------")
                 bst.inorder()
                 print("-----------------------------------------------------------------")
-                print("[Sistem: Data diambil melalui struktur Binary Search Tree]")
+                print("[System Status: Data diambil melalui struktur Binary Search Tree]")
                 print()
             elif menu == 2:
                 print("\n== Cari Varian Rasa ==")
-                varian = input("Masukkan Nama Varian: ")
-                src.cari_detail_menu(varian, data_produk)
+                varian = input("Masukkan Nama Varian : ")
+                src.cari_data_menu(varian, data_produk)
                 print()
             elif menu == 3:
                 varian_baru = produk_baru.Produk()
@@ -224,6 +227,7 @@ def menu_2():
 antrian = queue.Queue()
 def menu_3():
     data_produk = handler.load_json("data_center/produk.json")
+    daftar_cabang = handler.load_json("data_center/cabang.json")
     while True:
         tampilan_menu_3()
         data_pesanan_pelanggan = {}
@@ -231,14 +235,23 @@ def menu_3():
             menu = int(input("Pilih Opsi (1-4): "))
             if menu == 1:
                 while True:
-                    gerobak = input("\nMasukkan nama Gerobak: ")
+                    gerobak = input("\nMasukkan nama Gerobak [0 untuk batal]: ")
+                    if gerobak == '0':
+                        break
                     if validate.validasi_gerobak(gerobak) == False:
                         print("Gerobak tak ditemukan, lihat keyword kembali")
                         continue
-                    
+
+                    if validate.validasi_status_gerobak(daftar_cabang, gerobak) == False:
+                        print("Status Gerobak Sedang Tutup, silahkan ubah status gerobak terlebih dahulu")
+                        continue
+
                     data_gerobak = validate.validasi_gerobak(gerobak)
                     data_pesanan_pelanggan['nama gerobak'] = data_gerobak[0]
                     data_pesanan_pelanggan['kode gerobak'] = data_gerobak[1]
+                    break
+
+                if gerobak == '0':#jika user ingin membatalkan pembuatan pesanan
                     break
 
                 while True:
@@ -301,16 +314,26 @@ def menu_3():
             elif menu == 2:
                 data_transaksi = handler.load_json("data_center/transaksi.json")
                 to_transaction = antrian.dequeue()
+                for i in range(len(daftar_cabang)):
+                    if to_transaction['nama gerobak'] == daftar_cabang[i]['nama']:
+                        for item in to_transaction['pesanan']:
+                            daftar_cabang[i]['penjualan'] += item[1]
+                            handler.kurangi_stok(data_produk, item[0], item[1])                        
                 id_trx = gen.gen_id('transaksi')
                 to_transaction['id transaksi'] = id_trx
                 data_transaksi.append(to_transaction)
+                handler.save_json("data_center/cabang.json", daftar_cabang)
                 handler.save_json("data_center/transaksi.json", data_transaksi)
+                print("[System Status: Transaksi Berhasil!]\n")
                 
             elif menu == 3:
                 antrian.display(data_produk)
+
             elif menu == 4:
                 break
+
             else: print("Menu tidak ada")
+
         except ValueError: print("\nMenu hanya berupa angka bulat")
 
 def menu_4():
@@ -368,25 +391,66 @@ def menu_4():
             print(f"STATUS      : SELESAI ")
             print("=" *55)
 
-print()
-input("tekan ENTER untuk kembali ke menu utama")
+    print()
+    input("tekan ENTER untuk kembali ke menu utama")
 
 
 
 def menu_5():#fungsi untuk proses menu 5
+    data_member = handler.load_json("data_center/pelanggan.json")
+    member_ll = linked_list.LinkedList()
+    for item in data_member:
+        member_ll.append(item)
+    
+    hash_pelanggan = hash.HashTable(20)
+    for pelanggan in data_member:
+        hash_pelanggan.insert(pelanggan["telepon"],pelanggan)
+
     while True:
         try:
             tampilan_menu_5()
             menu = int(input("Pilih Opsi (1-4): "))
+
             if menu == 1:
-                continue
+                print("--- DAFTAR MEMBER SUSU GEPUK PEKANBARU ---")
+                print("-"*60)
+                member_ll.display()
+
             elif menu == 2:
-                continue
+                print("= CARI DATA MEMBER =")
+                nomor = input("Masukkan Nomor Telepon: ")
+                hasil = hash_pelanggan.search(nomor)
+                if hasil is not None:
+                    hasil_telepon = gen.format_telepon(hasil['telepon'])
+                    print("[DATA DITEMUKAN]")
+                    print("-"*30)
+                    print(f"ID         : {hasil['id']}")
+                    print(f"Nama       : {hasil['nama']}")
+                    print(f"No. Telepon: {hasil_telepon}")
+                    print(f"Poin       : {hasil['poin']}")
+                    print(f"Level      : {hasil['tingkat']}\n")
+                    print("-"*30)
+                    print()
+                    
+                else:
+                    print("Pelanggan tidak ditemukan\n")
+
+                input("tekan ENTER untuk kembali ke menu 5")
+                
+
+
             elif menu == 3:
-                continue
+                new_member = member.Member()
+                print("== REGISTRASI MEMBER BARU ==")
+                new_member.append()
+                data_member_baru = new_member.to_dict()
+                data_member.append(data_member_baru)
+                handler.save_json("data_center/pelanggan.json", data_member)
+                print("Member Baru berhasil ditambahkan!\n")
+                
             elif menu == 4:
-                continue
-            else: print("\nOpsi tidak ada")
+                break
+            else: print("\nOpsi tidak ada\n")
         except ValueError: print("\ninput hanya berupa angka bulat\n")
 
 def system():#fungsi sistem utama

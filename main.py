@@ -197,6 +197,7 @@ def menu_1():
             print("Masukan salah")
     
 def menu_2():
+    global saldo
 
     #Data produk.json di-load ke sistem
     data_produk = handler.load_json("data_center/produk.json")
@@ -440,7 +441,8 @@ def menu_4():
     while True:
         print("[A] Tampilkan 3 Transaksi Terakhir")
         print("[B] Tampilkan Riwayat Transaksi")
-        print("[C] Keluar")
+        print("[C] Tampilkan Riwayat Transaksi dari Pembayaran Terbesar")
+        print("[D] Keluar")
         choice = input("Pilih Opsi: ").upper()
         if choice == 'A':
             #jika file masih kosong
@@ -496,6 +498,21 @@ def menu_4():
         elif choice == 'B':
             transaksi_dll.lihat_transaksi(data_produk)
         elif choice == 'C':
+            data_trx = data_transaksi.copy()
+            transaksi_urut = srt.selection_sort_transaksi(data_trx)
+            for i in range(len(transaksi_urut)):
+                pesanan = set()
+                for item in transaksi_urut[i]['pesanan']:
+                    bucket1, bucket_dummy = src.cari_detail_menu(data_produk, item[0])
+                    pesanan.add(bucket1)
+                print("-" * 50)
+                print(f"ID Transaksi      : {transaksi_urut[i]['id transaksi']}")
+                print(f"Nama Gerobak      : {transaksi_urut[i]['nama gerobak']} [{transaksi_urut[i]['kode gerobak']}]")
+                print(f"Pelanggan         : {transaksi_urut[i]['nama']}")
+                print(f"Jenis menu pesanan: {pesanan}")
+                print(f"Total             : Rp {transaksi_urut[i]['total harga']},00")
+            print()
+        elif choice == 'D':
             break
 
         else: print("Opsi tak valid\n")

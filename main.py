@@ -558,6 +558,8 @@ def menu_5():#fungsi untuk proses menu 5
                     print(f"Poin       : {hasil['poin']}")
                     print(f"Level      : {hasil['tingkat']}\n")
                     print("-"*30)
+                    if hasil['tingkat'] == 'Premium':
+                        print("*catatan: Member Premium berhak mendapatkan diskon 10% setiap hari Jum'at")
                     print()
                     
                 else:

@@ -398,6 +398,7 @@ def menu_4():
 
 def menu_5():#fungsi untuk proses menu 5
     data_member = handler.load_json("data_center/pelanggan.json")
+
     member_ll = linked_list.LinkedList()
     for item in data_member:
         member_ll.append(item)
@@ -405,6 +406,10 @@ def menu_5():#fungsi untuk proses menu 5
     hash_pelanggan = hash.HashTable(20)
     for pelanggan in data_member:
         hash_pelanggan.insert(pelanggan["telepon"],pelanggan)
+
+    member_cll = circular_linked_list.CircularLinkedList()
+    for pelanggan in data_member:
+        member_cll.append(pelanggan)
 
     while True:
         try:
@@ -445,6 +450,13 @@ def menu_5():#fungsi untuk proses menu 5
                 new_member.append()
                 data_member_baru = new_member.to_dict()
                 data_member.append(data_member_baru)
+
+                member_ll.append(data_member_baru)
+
+                hash_pelanggan.insert(data_member_baru["telepon"],data_member_baru)
+
+                member_cll.append(data_member_baru)
+
                 handler.save_json("data_center/pelanggan.json", data_member)
                 print("Member Baru berhasil ditambahkan!\n")
                 

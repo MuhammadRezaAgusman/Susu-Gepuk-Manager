@@ -10,7 +10,7 @@ def cari_data_menu(nama, data):
             Harga      : Rp. {data[i]['harga']}
             Status Stok: {status}\n""")
             return
-    else: print("Menu Tak Ditemukan")
+    print("Menu Tak Ditemukan")
 
 def input_menu(data, suggest):
     for i in range(len(data)):

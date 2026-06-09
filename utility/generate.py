@@ -7,7 +7,15 @@ data_produk = handler.load_json("data_center/produk.json")
 def gen_id(data):
     data_id = handler.load_json("data_center/id_library.json")
     if data == 'transaksi':
+        tanggal_terakhir = data_id[data][4:12]
         tanggal = datetime.now().strftime("%Y%m%d")
+
+        if tanggal_terakhir != tanggal:
+            id_baru = f"{data_id[data][:3]}-{tanggal}-001"
+            data_id[data] = id_baru
+            handler.save_json("data_center/id_library.json", data_id)
+            return id_baru
+        
         id_terakhir_diupdate = int(data_id[data][-3:])+1
         id_baru = f"{data_id[data][:3]}-{tanggal}-{id_terakhir_diupdate:03}"
         data_id[data] = id_baru
@@ -31,4 +39,7 @@ def gen_tampilan_pesanan(data , antrean, id_antrean):
         total_harga += harga*antrean['pesanan'][i][1]
         print(f"        {antrean['pesanan'][i][1]}x {nama}")
     print(f"Total Harga: Rp. {total_harga}")
+
+def format_telepon(no):
+    return f"{no[:4]}-{no[4:8]}-{no[8:]}"
     

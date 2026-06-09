@@ -232,10 +232,10 @@ def menu_2():
             elif menu == 4:
                 while True:
                     nama_produk = input("Masukkan Nama Produk [0 untuk keluar]: ")
+                    if nama_produk == '0': break
                     if validate.validasi_menu(nama_produk) == False:
                         print("Nama tidak valid\n")
                         continue
-                    if nama_produk == '0': break
                     break
                 if nama_produk == '0': break   
                 while True:
@@ -251,6 +251,7 @@ def menu_2():
                         saldo -= data_produk[indeks_menu]['modal']*stok_tambah
                         data_produk[indeks_menu]['stok'] += stok_tambah
                         handler.save_json("data_center/produk.json", data_produk)
+                        break
                     except ValueError: print("Hanya angka integer yang diperbolehkan")
                 if stok_tambah == 0: break
 

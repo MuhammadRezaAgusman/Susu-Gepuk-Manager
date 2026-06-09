@@ -4,7 +4,7 @@
         "nama": "Gerobak Panam (Depan UNRI)",
         "kecamatan": "Tuah Madani",
         "status": "BUKA",
-        "penjualan": 5
+        "penjualan": 3
     },
     {
         "id": "GRB-002",
@@ -18,7 +18,7 @@
         "nama": "Gerobak Gobah",
         "kecamatan": "Sail",
         "status": "BUKA",
-        "penjualan": 0
+        "penjualan": 1
     },
     {
         "id": "GRB-004",

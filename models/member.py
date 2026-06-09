@@ -29,6 +29,9 @@ class Member:
             if vdl.validasi_nomor_telepon(self.nomor_telepon) == False:
                 print("Nomor Telepon Tidak Valid")
                 continue
+            elif vdl.cek_duplikasi_nomor_telepon(self.nomor_telepon) == False:
+                print("Nomor Telepon sudah digunakan")
+                continue
             break
     
     def to_dict(self):

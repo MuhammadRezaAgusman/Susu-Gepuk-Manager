@@ -43,3 +43,26 @@ def gen_tampilan_pesanan(data , antrean, id_antrean):
 def format_telepon(no):
     return f"{no[:4]}-{no[4:8]}-{no[8:]}"
     
+def total_jual(data_cabang):
+    total = 0
+    for item in data_cabang:
+        total += item['penjualan']
+    return total
+
+def hitung_keuntungan(data_gerobak):
+    keuntungan = 2000 #keuntungan per menu
+    total_keuntungan = 0
+    for item in data_gerobak:
+        total_keuntungan += item['penjualan']*keuntungan
+    return total_keuntungan
+
+def hitung_poin(total_harga):
+    poin = total_harga // 10000
+    return poin
+
+def save_poin(data_member, nomor, jumlah):
+    for i in range(len(data_member)):
+        if data_member[i]['telepon'] == nomor:
+            poin = hitung_poin(jumlah)
+            data_member[i]['poin'] += poin
+            handler.save_json("data_center/pelanggan.json", data_member)

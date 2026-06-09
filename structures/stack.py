@@ -11,7 +11,7 @@ class Stack:
         #mengambil transaksi dengan konsep LIFO
         if not self.is_empty():
             return self.items.pop()
-        raise IndexError("[SISTEM ERROR]:Gagal mengambil data, stack masih kosong.")
+        raise IndexError("[SIystem Status: Gagal mengambil data, stack masih kosong.]")
         
     def peek(self):
         #melihat transaksi baru tanpa menghapus

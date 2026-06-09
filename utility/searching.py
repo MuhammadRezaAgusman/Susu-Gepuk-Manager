@@ -21,3 +21,13 @@ def cari_detail_menu(data, id):
     for i in range(len(data)):
         if data[i]['kode'] == id:
             return data[i]['nama'], data[i]['harga']
+        
+def cari_indeks_menu(data, nama):
+    for i in range(len(data)):
+        if nama in data[i]['nama']:
+            return i
+
+def cari_indeks_member(data, nomor):
+    for i in range(len(data)):
+        if nomor == data[i]['telepon']:
+            return i

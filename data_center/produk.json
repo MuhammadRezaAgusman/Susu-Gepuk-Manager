@@ -3,54 +3,63 @@
         "kode": "PRD-001",
         "nama": "Susu Gepuk Strawberry ",
         "harga": 16000,
+        "modal": 14000,
         "stok": 23
     },
     {
         "kode": "PRD-002",
         "nama": "Susu Gepuk Cheese ",
         "harga": 18000,
-        "stok": 20
+        "modal": 16000,
+        "stok": 15
     },
     {
         "kode": "PRD-003",
         "nama": "Susu Gepuk Matcha Kyoto ",
         "harga": 18000,
-        "stok": 14
+        "modal": 16000,
+        "stok": 6
     },
     {
         "kode": "PRD-004",
         "nama": "Susu Gepuk Tawar Plain ",
         "harga": 13000,
-        "stok": 20
+        "modal": 11000,
+        "stok": 19
     },
     {
         "kode": "PRD-005",
         "nama": "Susu Gepuk Manis Delight ",
         "harga": 14000,
+        "modal": 12000,
         "stok": 20
     },
     {
         "kode": "PRD-006",
         "nama": "Susu Gepuk Vanilla Sweet ",
         "harga": 15000,
+        "modal": 13000,
         "stok": 20
     },
     {
         "kode": "PRD-007",
         "nama": "Susu Gepuk Melon Frost ",
         "harga": 15000,
+        "modal": 13000,
         "stok": 20
     },
     {
         "kode": "PRD-008",
         "nama": "Susu Gepuk Coklat Swiz ",
         "harga": 16000,
+        "modal": 14000,
         "stok": 16
     },
     {
         "kode": "PRD-009",
         "nama": "Susu Gepuk Taro Royale ",
         "harga": 18000,
+        "modal": 16000,
         "stok": 20
     }
 ]

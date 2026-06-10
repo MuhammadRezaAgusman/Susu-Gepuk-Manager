@@ -335,6 +335,7 @@ def menu_3():
 
                     id_menu = src.input_menu(data_produk, pesanan_menu)
                     
+                    pilih = -1 #menghindari error di kondisi if setelah ini
                     while True:
                         try:
                             jumlah_pesanan = int(input("Jumlah pesanan: "))
@@ -373,8 +374,8 @@ def menu_3():
                         elif pesan_lagi == 'N':
                             total_harga = 0
                             data_pesanan_pelanggan['membership'] = False
-
                             data_pesanan_pelanggan['pesanan'] = pesanan
+                            
                             for i in range(len(pesanan)):
                                 dummy, harga = src.cari_detail_menu(data_produk, pesanan[i][0])
                                 total_harga += harga*pesanan[i][1]

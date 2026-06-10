@@ -340,13 +340,22 @@ def menu_3():
                             jumlah_pesanan = int(input("Jumlah pesanan: "))
                             if validate.cek_stok(data_produk, id_menu, jumlah_pesanan)== False:
                                 print("Stok tak cukup")
-                                pilih = input("Ganti pemesanan?(Y/N) ").upper()
-                                if pilih == "Y":
+                                while True:
+                                    pilih = input("Ganti pemesanan?(Y/N) ").upper()
+                                    if pilih == "Y":
+                                        print()
+                                        break
+                                    elif pilih == "N":
+                                        break
+                                    else: print("Masukkan input yang diminta!")
+
+                                #validasi pilihan didalam while loop sebelumnya
+                                if pilih == "Y":#kembali ke pesan menu varian
                                     print()
                                     break
-                                elif pilih == "N":
+                                elif pilih == "N":#kembali meminta pesanan
                                     continue
-                                else: print("Masukkan input yang diminta!")
+
                             else: 
                                 chamber = [id_menu, jumlah_pesanan]
                                 pesanan.append(chamber)

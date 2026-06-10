@@ -3,7 +3,7 @@ from utility import searching as src
 from utility import sorting as srt
 from utility import validate
 from utility import generate as gen
-from models import cabang, member, produk_baru, transaksi
+from models import member, produk_baru
 from structures import circular_linked_list, double_linked_list, graph, linked_list, queue, stack, tree, hash
 import time
 import datetime
@@ -542,7 +542,7 @@ def menu_4():
 def menu_5():#fungsi untuk proses menu 5
     data_member = handler.load_json("data_center/pelanggan.json")
     data_member = gen.sinkronisasi_poin_all(data_member)
-    
+
     member_ll = linked_list.LinkedList()
     for item in data_member:
         member_ll.append(item)

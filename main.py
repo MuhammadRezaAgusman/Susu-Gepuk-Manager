@@ -145,7 +145,7 @@ def menu_1():
                 if validate.validasi_id(data_cabang, tujuan) == True:#validasi input id tujuan
                     break
                 else: 
-                    print("ID asal tak ditemukan") 
+                    print("ID tujuan tak ditemukan") 
 
             jarak, rute = path.dijkstra(asal, tujuan)
             print("Mencari rute terpendek via Graph...")
@@ -310,7 +310,7 @@ def menu_3():
                             membership_status = validate.validasi_status_membership(data_member,nomor)
                             if membership_status == False:
                                 print("Nomor Tak Terdaftar")
-                                break
+                                continue
                             nama_pelanggan = membership_status
                             data_pesanan_pelanggan['nomor telepon'] = nomor
                             break
@@ -343,14 +343,18 @@ def menu_3():
                                 pilih = input("Ganti pemesanan?(Y/N) ").upper()
                                 if pilih == "Y":
                                     print()
-                                elif pilih == "N":
                                     break
+                                elif pilih == "N":
+                                    continue
                                 else: print("Masukkan input yang diminta!")
                             else: 
                                 chamber = [id_menu, jumlah_pesanan]
                                 pesanan.append(chamber)
                                 break
                         except ValueError: print("Masukan hanya angka bulat")
+                    
+                    if pilih == 'Y':
+                        continue
 
                     while True:
                         pesan_lagi = input("Pesan lagi (Y/N)? ").upper()

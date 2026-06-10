@@ -66,3 +66,22 @@ def save_poin(data_member, nomor, jumlah):
             poin = hitung_poin(jumlah)
             data_member[i]['poin'] += poin
             handler.save_json("data_center/pelanggan.json", data_member)
+
+def poin_level(poin):
+    if poin < 100:
+        return "Reguler"
+    else: return "Premium"
+
+def sinkronisasi_poin(data_member, nomor):
+    for i in range(len(data_member)):
+        if data_member[i]['telepon'] == nomor:
+            status = poin_level(data_member[i]['poin'])
+            data_member[i]['tingkat'] = status
+            return data_member
+
+def sinkronisasi_poin_all(data_member):
+    for i in range(len(data_member)):
+        status = poin_level(data_member[i]['poin'])
+        data_member[i]['tingkat'] = status
+        return data_member
+            

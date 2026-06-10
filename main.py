@@ -375,7 +375,7 @@ def menu_3():
                             total_harga = 0
                             data_pesanan_pelanggan['membership'] = False
                             data_pesanan_pelanggan['pesanan'] = pesanan
-                            
+
                             for i in range(len(pesanan)):
                                 dummy, harga = src.cari_detail_menu(data_produk, pesanan[i][0])
                                 total_harga += harga*pesanan[i][1]
@@ -397,7 +397,9 @@ def menu_3():
                     
                     if pesan_lagi == 'N':
                         break
+
                 if pesan_lagi == "N":
+
                     if data_pesanan_pelanggan['total harga'] == 0:
                         break
 
@@ -414,6 +416,9 @@ def menu_3():
                 to_transaction = antrian.dequeue()
                 if to_transaction['membership'] == True:
                     gen.save_poin(data_member, to_transaction['nomor telepon'], to_transaction['total harga'])
+                    chamber = gen.sinkronisasi_poin(data_member, to_transaction['nomor telepon'])
+                    data_member = chamber.copy()
+                    handler.save_json("data_center/pelanggan.json", data_member)
 
                 for i in range(len(daftar_cabang)):
                     if to_transaction['nama gerobak'] == daftar_cabang[i]['nama']:
@@ -536,7 +541,8 @@ def menu_4():
 
 def menu_5():#fungsi untuk proses menu 5
     data_member = handler.load_json("data_center/pelanggan.json")
-
+    data_member = gen.sinkronisasi_poin_all(data_member)
+    
     member_ll = linked_list.LinkedList()
     for item in data_member:
         member_ll.append(item)

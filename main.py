@@ -228,7 +228,7 @@ def menu_2():
                 varian_baru.insert(new_id)
                 data_produk.append(varian_baru.to_dict())
                 handler.save_json("data_center/produk.json", data_produk)
-                print("[System Status: Varian baru berhasil disimpan!\n]")
+                print("[System Status: Varian baru berhasil disimpan!]\n")
             elif menu == 4:
                 while True:
                     nama_produk = input("Masukkan Nama Produk [0 untuk keluar]: ")
@@ -324,7 +324,7 @@ def menu_3():
 
                 while True:
                     pesanan_menu = input("Masukkan Menu [nama pastikan sesuai dengan daftar]: ")
-                    if menu == 'Susu Gepuk' or menu == 'Susu' or menu == 'Gepuk':
+                    if pesanan_menu == 'Susu Gepuk' or pesanan_menu == 'Susu' or pesanan_menu == 'Gepuk':
                         print("Masukkan nama menu langsung\n")
                         continue
                     if validate.validasi_menu(pesanan_menu) == False:

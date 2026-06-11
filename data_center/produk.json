@@ -18,7 +18,7 @@
         "nama": "Susu Gepuk Matcha Kyoto ",
         "harga": 18000,
         "modal": 16000,
-        "stok": 24
+        "stok": 23
     },
     {
         "kode": "PRD-004",
@@ -60,6 +60,13 @@
         "nama": "Susu Gepuk Taro Royale ",
         "harga": 18000,
         "modal": 16000,
-        "stok": 20
+        "stok": 19
+    },
+    {
+        "kode": "PRD-010",
+        "nama": "Susu Gepuk Semangka",
+        "harga": 18000,
+        "modal": 16000,
+        "stok": 2
     }
 ]

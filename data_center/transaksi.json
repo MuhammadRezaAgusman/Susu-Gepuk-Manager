@@ -46,5 +46,25 @@
         "total harga": 54000,
         "id antrian": "ATR-002",
         "id transaksi": "TRX-20260609-002"
+    },
+    {
+        "nama gerobak": "Gerobak Marpoyan (Depan UIR)",
+        "kode gerobak": "GRB-002",
+        "nomor telepon": null,
+        "nama": "Prabowo",
+        "membership": false,
+        "pesanan": [
+            [
+                "PRD-009",
+                1
+            ],
+            [
+                "PRD-003",
+                1
+            ]
+        ],
+        "total harga": 36000,
+        "id antrian": "ATR-003",
+        "id transaksi": "TRX-20260611-001"
     }
 ]

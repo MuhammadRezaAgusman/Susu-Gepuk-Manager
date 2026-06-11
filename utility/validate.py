@@ -9,7 +9,7 @@ def validasi_id(data, suggest):
     if suggest == '':
         return False
     for i in range(len(data)):
-        if suggest in data[i]['id'] :
+        if suggest == data[i]['id'] :
             return True
     return False
 
@@ -32,6 +32,7 @@ def validasi_nama(nama):
     return True
 
 def validasi_menu(menu_suggest):
+    data_menu = handler.load_json("data_center/produk.json")
     if menu_suggest == '':
         return False
     for i in range(len(data_menu)):
@@ -76,7 +77,7 @@ def cek_duplikasi_nomor_telepon(nomor):
     return True
 
 def validasi_jumlah_stok(data_produk, saldo, indeks, jumlah_masukan):
-    if data_produk[indeks]['harga']*jumlah_masukan > saldo:
+    if data_produk[indeks]['modal']*jumlah_masukan > saldo:
         return False
     return True
 

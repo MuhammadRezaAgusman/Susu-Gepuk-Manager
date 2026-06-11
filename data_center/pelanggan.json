@@ -5,5 +5,12 @@
         "telepon": "081365891486",
         "poin": 20,
         "tingkat": "Reguler"
+    },
+    {
+        "nama": "Muhammad Ariq",
+        "id": "PLG-002",
+        "telepon": "08123456789",
+        "poin": 0,
+        "tingkat": "Reguler"
     }
 ]

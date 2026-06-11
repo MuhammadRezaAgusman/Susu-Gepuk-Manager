@@ -11,13 +11,13 @@
         "nama": "Gerobak Marpoyan (Depan UIR)",
         "kecamatan": "Marpoyan Damai",
         "status": "BUKA",
-        "penjualan": 0
+        "penjualan": 2
     },
     {
         "id": "GRB-003",
         "nama": "Gerobak Gobah",
         "kecamatan": "Sail",
-        "status": "BUKA",
+        "status": "TUTUP",
         "penjualan": 1
     },
     {

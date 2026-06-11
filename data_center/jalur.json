@@ -33,5 +33,10 @@
         "asal": "GRB-005",
         "tujuan": "GRB-002",
         "jarak": 9.6
+    },
+    {
+        "asal": "GRB-003",
+        "tujuan": "GRB-001",
+        "jarak": 10.6
     }
 ]
